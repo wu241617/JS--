@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>基于数组封装栈</title>
+	</head>
+	<body>
+		<script>
+			//JS 中 Stack.prototype.push ，方法定义在原型上，对象实例公用（减少内存消耗）
+			// 封装栈类
+			function Stack(){
+				//栈中的属性
+				this.items = [];
+				//栈的相关操作
+				//1,添加一个新元素到栈顶位置
+				Stack.prototype.push = function(x){
+					this.items.push(x);
+				}
+				//2,移除栈顶元素，同时返回被移除的元素
+				Stack.prototype.pop = function(){
+					return this.items.pop();
+				}
+				//3,返回栈顶元素，不对栈做任何修改
+				Stack.prototype.peek = function(){
+					return this.items[this.items.length-1];
+				}
+				//4,判断栈是否为空
+				Stack.prototype.isEmpty = function(){
+					return this.items.length === 0;
+				}
+				//5,返回栈里元素的个数
+				Stack.prototype.size = function(){
+					return this.items.length;
+				}
+				//6,将栈结构内容以字符串形式返回
+				Stack.prototype.toString = function(){
+					var resultStr = '';
+					for(var i=0; i<this.items.length; i++){
+						resultStr += this.items[i] + ' ';
+					}
+					return resultStr;
+				}
+				
+			}
+			
+			//栈的使用
+			var stack = new Stack();
+			stack.push(10);
+			stack.push(34);
+			stack.push(56);
+			stack.push(78);
+			alert(stack);
+			stack.pop();
+			alert(stack);
+			alert(stack.peek());
+			alert(stack.isEmpty());
+			alert(stack.size());
+			alert(stack.toString());
+		</script>
+	</body>
+</html>

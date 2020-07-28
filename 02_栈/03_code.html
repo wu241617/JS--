@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			html,body{
+				width:100%;
+				height:100%;
+			}
+			html{
+				font-size:20px;
+			}
+			main{
+				display:block;
+				width:20rem;
+				height:auto;
+				margin:2rem auto 0;
+				padding:1rem;
+				box-shadow:0 0 0.5rem 0.5rem #666;
+				border-radius:1rem;
+				font-size:0.7rem;
+			}
+			h3{
+				width:100%;
+				height:2rem;
+				text-align:center;
+				line-height:2rem;
+				background-color:black;
+				color:white;
+				margin:0.5rem 0;
+			}
+			div{
+				width:100%;
+				height:4rem;
+				display:flex;
+				align-items:center;
+			}
+			span{
+				display:block;
+				width:5rem;
+			}
+			hr{
+				border:0.1rem solid green;
+				margin-top:0.5rem 0;
+			}
+			button{
+				display:block;
+				border:none;
+				width:4rem;
+				height:1.5rem;
+				text-align:center;
+				line-height:1.5rem;
+				background-color:deepskyblue;
+				color:white;
+				transition:all 1s;
+				margin:0.5rem 0;
+			}
+			button:hover{
+				background-color:dodgerblue;
+			}
+			.right{
+				margin-left:1rem;
+			}
+			input{
+				width:4rem;
+			}
+		</style>
+		<style>
+			@media (max-width:450px) {
+				main{
+					width:auto;
+					height:auto;
+					padding:0;
+					margin:0;
+				}
+			}
+		</style>
+		<title>栈的实例---十进制转二进制</title>
+	</head>
+	<body>
+		<main>
+			<h3>栈的实例---十进制转二进制</h3>
+			<div>
+				<span >二进制：</span>
+				<input type="text" placeholder="请输入数字!" name="num">
+			</div>
+			<hr>
+			<div>
+				<button>转换</button>
+				<span class="right">对应十进制：</span>
+			</div>
+		</main>
+		<script>
+			function Stack(){
+				//栈中的元素
+				this.items = [];
+				//栈中的方法
+				//1，元素进栈
+				Stack.prototype.push = function(el){
+					this.items.push(el);
+				}
+				//2,元素出栈
+				Stack.prototype.pop = function(){
+					return this.items.pop();
+				}
+				//3,查看栈顶元素
+				Stack.prototype.peek = function(){
+					return this.items[this.items.length -1];
+				}
+				//4,判断栈是否为空
+				Stack.prototype.isEmpty = function(){
+					return this.items.length === 0;
+				}
+				//5,返回栈里元素的个数
+				Stack.prototype.size = function(){
+					return this.items.length;
+				}
+				//6,将栈结构内容以字符串形式返回
+				Stack.prototype.toString = function(){
+					var resultStr = '';
+					for(var i=0; i<this.items.length; i++){
+						resultStr += this.items[i] + '';
+					}
+					return resultStr;
+				}
+			}
+				
+			function convert(num){
+				var s = new Stack();
+				while(num > 0){// 当num小于等于0的时候终止循环
+					// 把每次num%2的结果压入栈中
+					s.push(num%2);
+					// 每次num更新数值为，num/2d的整数
+					num = Math.floor(num/2);
+				}
+				var result = '';
+				while(!s.isEmpty()){
+					result += s.pop();
+				}
+				return result;
+			}
+			
+			var input = document.querySelector('[name="num"]');
+			var btn = document.querySelector('button');
+			btn.addEventListener('click',function(){
+				var num = Number(input.value);
+				document.querySelector('.right').innerHTML = '对应的十进制为：' + convert(num);
+			},false);
+			
+		</script>
+	</body>
+</html>
