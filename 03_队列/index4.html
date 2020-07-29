@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>封装优先级队列</title>
+	</head>
+	<body>
+		<script>
+			// 封装优先级队列类
+			function PriorityQueue(){
+				// 创建新的类，可以理解为内部类
+				function QueueElement(element,priority){
+					this.element = element;
+					this.priority = priority;	
+				}
+				// 属性
+				this.items = [];
+				// 方法
+				PriorityQueue.prototype.enqueue = function(element,priority){
+					//1,创建QueueElement对象
+					var queueElement = new QueueElement(element,priority);
+					//2，判断队列为空
+					// 队列为空，添加首个元素，不用比较，直接添加
+					if(this.items.length === 0){
+						this.items.push(queueElement);
+					}else{
+						var added = false;
+						// 循环优先级比较，找出第一个大于它的优先级的位置，添加到它之前
+						for(var i=0; i<this.items.length; i++){
+							if(queueElement.priority < this.items[i].priority){
+								this.items.splice(i,0,queueElement);
+								added = true;
+								break;
+							}
+						}
+						// 如果没有找到比它大的优先级，则添加到最后
+						if(!added){
+							this.items.push(queueElement);
+						}
+					}
+				}
+				//2，移除队列的第一项，并返回被移除的元素
+				PriorityQueue.prototype.dequeue  = function(){					
+					return this.items.shift();
+				}
+				//3，返回队列中第一个元素，队列不做任何改变
+				PriorityQueue.prototype.front = function(){
+					return this.items[0];
+				}
+				//4，判断队列是否为空
+				PriorityQueue.prototype.isEmpty = function(){
+					return this.items.length === 0;
+				}
+				//5，返回队列包含的元素个数
+				PriorityQueue.prototype.size = function(){
+					return this.items.length;
+				}
+				//6，将队列中的内容转化为字符串形式
+				PriorityQueue.prototype.toString = function(){
+					var resultStr = '';
+					for(var i=0; i<this.items.length;i++){
+						resultStr += this.items[i].element+' :'+this.items[i].priority+' ';
+					}
+					return resultStr;
+				}
+			
+			}
+			
+			// 测试代码
+			var pq = new PriorityQueue();
+			pq.enqueue('asd',111);
+			pq.enqueue('bdf',200);
+			pq.enqueue('cds',50);
+			pq.enqueue('tfd',66);
+			alert(pq.toString());
+		</script>
+	</body>
+</html>

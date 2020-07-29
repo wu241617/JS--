@@ -2,12 +2,69 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			html,body{
+				width:100%;
+				height:100%;
+			}
+			html{
+				font-size:20px;
+			}
+			main,section{
+				display:block;
+			}
+			main{
+				width:30rem;
+				height:auto;
+				margin:2rem auto 0;
+				padding:1rem;
+				border-radius:1rem;
+				box-shadow:0 0 0.5rem 0.5rem #666;
+				font-size:0.7rem;
+			}
+			h3{
+				width:100%;
+				height:2rem;
+				text-align:center;
+				line-height:2rem;
+				background-color:black;
+				color:white;
+				margin:0.5rem 0;
+			}
+			ul{
+				list-style-position:inside;
+				padding:1rem;
+			}
+			ul>li{
+				margin:0.5rem;
+			}
+		</style>
+		<style>
+			@media (max-width:450px) {
+				main{
+					width:auto;
+					height:auto;
+					padding:0;
+					margin:0;
+				}
+			}
+		</style>
 		<title>优先级队列</title>
 	</head>
 	<body>
 		<main>
 			<section>
 				<h3>JS数据结构和算法——优先级队列</h3>
+				<ul>
+					<li>优先队列的特点：我们知道，普通队列插入一个元素，数据会被放到后端，并且需要前面所有的元素都处理完成之后才会处理后面的数据。但是优先队列，再插入一个元素的时候会考虑该数据的优先级。和其他数据的优先级进行比较，比较完成之后，可以得出这个元素在队列中正确的位置，其他的处理方式，和基本队列的处理方式一样。</li>
+					<li>应用场景：计算机中，我们也可以通过优先级队列来重新排序队列中任务的顺序。比如每个线程处理的任务重要性不同，我们可以通过优先级的大小，来决定该线程在队列中被处理的顺序。</li>
+					<li>实现优先级队列主要有俩方面需要考虑：1，封装元素和优先级放在一起；2，添加元素时，将新元素的优先级和队列中已经存在的优先级进行比较，已获取自己正确的位置。</li>
+				</ul>
 			</section>
 		</main>
 	</body>
