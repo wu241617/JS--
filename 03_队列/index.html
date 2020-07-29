@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,vewport-fit=cover">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			html {
+				font-size: 20px;
+			}
+
+			main,
+			section {
+				display: block;
+			}
+
+			main {
+				width: 30rem;
+				height: auto;
+				margin: 2rem auto 0;
+				padding: 1rem;
+				border-radius: 1rem;
+				box-shadow: 0 0 0.5rem 0.5rem #666;
+				font-size: 0.7rem;
+			}
+
+			h3 {
+				width: 100%;
+				height: 2rem;
+				text-align: center;
+				line-height: 2rem;
+				background-color: black;
+				color: white;
+				margin: 0.5rem 0;
+			}
+
+			ul {
+				list-style-position: inside;
+				padding: 1rem;
+			}
+
+			ul>li {
+				margin: 0.5rem 0;
+			}
+		</style>
+		<style>
+			@media (max-width:450px) {
+				main {
+					width: auto;
+					height: auto;
+					padding: 0;
+					margin: 0;
+				}
+			}
+		</style>
+		<title></title>
+	</head>
+	<body>
+		<main>
+			<section>
+				<h3>JS数据结构和算法——队列(Queue)</h3>
+				<ul>
+					<li>队列（Queue），它是一种受限的线性表，先进先出（FIFO）。</li>
+					<li>受限之处在于它只允许在表的前端进行删除操作，在表的后端进行插入操作。</li>
+					<li>构建队列，可以有数组，也可以使用链表去构建队列。</li>
+					<li>使用场景：打印队列，有五封文档需要打印，这些文档会按照次序放入到打印队列中，打印机会依次从队列中取出文档，优先放入的文档，优先被取出，并且对该文档进行打印，以此类推，直到队列中不再有新的文档。</li>
+					<li>使用场景：线程队列，在开发中，为了让任务可以并行处理，通常会开启多个线程。但是，我们不能让大量的线程同时运行处理任务，否则占用资源太多。这个时候，如果有需要开启的线程处理任务的情况，我们就会使用线程队列，线程队列会依照次序来启动线程，并且处理对应的任务。</li>
+					<li>面试题，击鼓传花：新游戏规则，几个朋友一起玩一个游戏，围成一圈，开始数数，数到某个数字的人自动淘汰，最后剩下的这个人会获取胜利，请问最后剩下的是原来在哪一个位置上的人。封装一个基于队列的函数，参数，所有参与人的姓名，基于的数字。结果：最终剩下的一个人的姓名。</li>
+				</ul>
+			</section>
+		</main>
+	</body>
+</html>
