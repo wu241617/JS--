@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,intial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			html,body{
+				width:100%;
+				height:100%;
+			}
+			html{
+				font-size:20px;
+			}
+			main,section{
+				display:block;
+			}
+			main{
+				width:30rem;
+				height:auto;
+				margin:2rem auto 0;
+				padding:1rem;
+				box-shadow:0 0 0.5rem 0.5rem #666;
+				border-radius:1rem;
+				font-size:0.7rem;
+			}
+			h3{
+				width:100%;
+				height:2rem;
+				text-align:center;
+				line-height:2rem;
+				background-color:black;
+				color:white;
+				margin:0.5rem 0;
+			}
+			ul{
+				list-style-position:all 1s;
+				padding:1rem;
+			}
+			ul>li{
+				margin:0.5rem 0;
+			}
+		</style>
+		<style>
+			@media (max-width:450px) {
+				main{
+					width:auto;
+					height:auto;
+					padding:0;
+					margin:0;
+				}
+			}
+		</style>
+		<title>链表</title>
+	</head>
+	<body>
+		<main>
+			<section>
+				<h3>JS数据结构和算法——链表</h3>
+				<ul>
+					<li>链表和数组一样，可以用来存储一系列的元素，但是链表和数组的实现机制完全不一样。链表：另外一种常见的用于存储数据的线性结构。</li>
+					<li>数组：要存储多个元素，数组（或者称为列表）可能是最常用的数据结构。几乎每一种编程语言都有默认实现的数组结构。</li>
+					<li>数组的缺点：数组的创建通常需要申请一段连续的内存空间（一整块内存），并且大小是固定的（大多数编程语言数组都是固定的），所以当当前数组不能满足容量要求的时候，需要进行扩容。（一般情况下是申请一个更大的数组，然后将原数组中的元素复制过去）</li>
+					<li>而且在数组开头或中间位置插入数据的成本很高，需要大量元素的位移。尽管我们已经学过了javascript的Array类方法可以帮我们做这些事，但背后的原理依然是这样。</li>
+					<li>链表：要存储多个元素，另外一个选择就是链表。但不同于数组，链表中的元素在内存中不必是连续的空间。链表的每个元素由一个存储元素本身的节点和一个指向下一个元素的引用（有些语言成为指针或者连接）组成。</li>
+					<li>链表的优点：内存空间不必是连续的，可以充分利用计算机的内存，实现灵活的内存动态管理。链表不必在创建的时候就确定大小，并且大小可以无限延申下去。链表在插入和删除数据时，时间复杂度可以达到O(1),相对于数组效率高很多。</li>
+					<li>链表的缺点：链表访问任何一个位置的元素时，都需要从头开始访问。无法跳过第一个元素访问任何一个元素，无法通过下标直接访问元素，需要从头一个个访问，直到找到对应的元素。</li>
+				</ul>
+			</section>
+		</main>
+	</body>
+</html>

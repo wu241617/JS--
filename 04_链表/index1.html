@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>封装单向链表结构</title>
+	</head>
+	<body>
+		<script>
+			// 封装链表类
+			function LinkedList(){
+				// 封装内部节点类
+				function Node(data){
+					this.data = data;
+					this.next = null;
+				}
+				// 属性(头指针)
+				this.head = null;
+				this.length = 0;
+				// 方法
+				// 1，向列表尾部添加一个新的项
+				LinkedList.prototype.append = function(data){
+				// 1.1，创建新节点
+				var newNode = new Node(data);	
+				// 1.2，判断添加是否是第一个节点
+				if(this.length === 0){
+					this.head = newNode;
+				}else{
+				// 1.3，找到最后一个节点
+					var current = this.head;
+					while(current.next){
+						current = current.next;
+					}
+				// 1.4，让最后节点的next指向 newNode
+					current.next = newNode;
+				}
+				 // 1.5，length+1
+				this.length += 1;
+			}
+				// 2，向列表的特定位置插入一个新的项
+				LinkedList.prototype.insert = function(position,data){
+					// 2.1,对position进行越界判断
+					if(position < 0 && position > this.length){
+						return false;
+					}
+					// 2.2,创建对应节点
+					var newNode = new Node(data);
+					// 2.3,插入数据
+					// 2.3.1插入位置为0，第一个
+					if(position === 0){
+						newNode.next = this.head;
+						this.head = newNode;
+					}else{
+						// 2.3.2,position > 0
+						var index = 0;
+						var current = this.head;
+						var previous = null;
+						while(index++ < position){							previous = current;
+							current = current.next;
+							
+						}
+						newNode.next = current;
+						previous.next = newNode;
+					}
+					// 2.4,length+1
+					this.length += 1;
+					return true;
+				}
+				// 3，获取对应位置的元素
+				
+				// 4，返回元素在列表中的索引。如果列表中没有该元素则返回-1
+				
+				// 5，修改某个位置的元素
+				
+				// 6，从列表的特定位置移除一项
+				
+				// 7，从链表中移除一项
+				
+				// 8，判断链表是否为空
+				
+				// 9，返回链表包含的元素的个数
+				
+				// 10，由于链表项使用了Node类，就需要重写javascript对象默认的toString方法，让其只输出元素的值。
+				LinkedList.prototype.toString = function(){
+					// 1,定义变量
+					var current = this.head;
+					var listString = '';
+					// 2,循环获取每一个节点数据
+					while(current){
+						listString += current.data + ' ';
+						current = current.next;
+					}
+					return listString;
+				}
+			
+		}
+			// 1,创建LinkedList
+			var list = new LinkedList();
+			// 2,测试
+			list.append('abc');
+			list.append('acd');
+			list.append('rty');
+			list.append('ght');
+			alert(list.toString());
+		</script>
+	</body>
+</html>
