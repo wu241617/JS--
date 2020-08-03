@@ -13,9 +13,11 @@
 					this.data = data;
 					this.next = null;
 				}
+				
 				// 属性(头指针)
 				this.head = null;
 				this.length = 0;
+				
 				// 方法
 				// 1，向列表尾部添加一个新的项
 				LinkedList.prototype.append = function(data){
@@ -30,16 +32,17 @@
 					while(current.next){
 						current = current.next;
 					}
-				// 1.4，让最后节点的next指向 newNode
+				// 1.4，让最后节点的 next 指向 newNode 
 					current.next = newNode;
 				}
 				 // 1.5，length+1
 				this.length += 1;
 			}
+				
 				// 2，向列表的特定位置插入一个新的项
 				LinkedList.prototype.insert = function(position,data){
 					// 2.1,对position进行越界判断
-					if(position < 0 && position > this.length){
+					if(position < 0 || position > this.length){
 						return false;
 					}
 					// 2.2,创建对应节点
@@ -51,12 +54,12 @@
 						this.head = newNode;
 					}else{
 						// 2.3.2,position > 0
-						var index = 0;
+						var index = 0;// 标记位置
 						var current = this.head;
 						var previous = null;
-						while(index++ < position){							previous = current;
-							current = current.next;
-							
+						while(index++ < position){							
+							previous = current;
+							current = current.next;	
 						}
 						newNode.next = current;
 						previous.next = newNode;
@@ -65,19 +68,78 @@
 					this.length += 1;
 					return true;
 				}
+				
 				// 3，获取对应位置的元素
+				LinkedList.prototype.get = function(position){
+					// 3.1,position越界判断
+					if(position < 0 || position >= this.length){
+						return null;
+					}else{
+						// 3.2,找到对应位置的元素节点，并返回
+						var index = 0;
+						var current = this.head;
+						while(index++ < position){
+							current = current.next;
+						}
+						return current.data;
+					}
+					
+				}
 				
 				// 4，返回元素在列表中的索引。如果列表中没有该元素则返回-1
+				LinkedList.prototype.indexOf = function(data){
+					//4.1,循环比对每一项的data，找到相等的一项
+					var index = 0;
+					var current = this.head;
+					// 4.2,循环查找
+					while(current){
+						if(current.data === data){
+							//4.3，返回找到项对应的下标
+							return index;
+						}
+						current = current.next;
+						index += 1;
+					}
+					// 没有查找到，返回-1
+					return -1;
+				}
 				
 				// 5，修改某个位置的元素
+				LinkedList.prototype.update = function(position,data){
+					// 5.1,判断position是否越界
+					if(position < 0 || position > this.length){
+						return null;
+					}else{
+						// 5.2,定义变量
+						var index = 0;
+						var current = this.head;
+						// 5.3,循环查找对应位置的元素节点
+						while(index++ < position){
+							current = current.next;
+						}
+						current.data = data;
+					}
+				}
 				
-				// 6，从列表的特定位置移除一项
+				// 6，从列表的特定位置移除一项(根据位置下标)
+				LinkedList.prototype.removeAt = function(position){
+					
+				}	
 				
-				// 7，从链表中移除一项
+				// 7，从链表中移除一项(根据内容data)
+				LinkedList.prototype.remove = function(data){
+					
+				}
 				
 				// 8，判断链表是否为空
+				LinkedList.prototype.isEmpty = function(){
+					return this.length === 0;
+				}
 				
 				// 9，返回链表包含的元素的个数
+				LinkedList.prototype.size = function(){
+					return this.length;
+				}
 				
 				// 10，由于链表项使用了Node类，就需要重写javascript对象默认的toString方法，让其只输出元素的值。
 				LinkedList.prototype.toString = function(){
