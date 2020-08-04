@@ -123,12 +123,38 @@
 				
 				// 6，从列表的特定位置移除一项(根据位置下标)
 				LinkedList.prototype.removeAt = function(position){
-					
+					// 6.1，position越界判断
+					if(position < 0 || position >= this.length){
+						return false;
+					}else{
+						// 6.2，判断是否删除的为第一个节点
+						if(position === 0){
+							this.head = this.head.next;
+						}else{
+							// 6.3,删除元素不是第一个元素
+							var index = 0;
+							var current = this.head;
+							var previous = null;
+							while(index++ < position){
+								previous = current;
+								current = current.next;
+							}
+							// 6.4,前一个节点的next指向，current的next即可
+							previous.next = current.next;
+						}
+						// 6.5，length-1
+						this.length -= 1;
+						return true;
+						
+					}
 				}	
 				
 				// 7，从链表中移除一项(根据内容data)
 				LinkedList.prototype.remove = function(data){
-					
+					// 7.1，查找到对应数据的位置
+					var position = this.indexOf(data);
+					// 7.2，删除对应位置的元素
+					this.removeAt(position);
 				}
 				
 				// 8，判断链表是否为空
