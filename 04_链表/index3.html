@@ -148,11 +148,44 @@
 					}
 				}
 				//6,从列表的特定位置移除一项
-				DoublyLinedList.prototype.remove = function(data){
-					
+				DoublyLinedList.prototype.removeAt = function(position){
+					if(position < 0 || position >= this.length){
+						return null;
+					}else{
+						// 判断是否只有一个节点
+						var current = this.head;
+						if(this.length === 1){
+							this.head = null;
+							this.tail = null;
+						}else{
+							// 判断删除的是否为第一个节点
+							if(position === 0){
+								this.head.next.prev = null;
+								this.head = this.head.next;
+							}else if(position === this.length -1){
+							// 删除最后一个节点
+							current = this.tail;
+							this.tail.prev = null;
+							this.tail = this.tail.prev;
+								
+							}else{
+							// 删除中间的节点
+								var index = 0;
+								while(index++ < position){
+									current = current.next;
+								}
+								current.prev.next = current.next;
+								current.next.prev = current.prev;
+							}
+						}
+						// 长度-1
+						this.length -= 1;
+						return current.data;
+					}
 				}
 				//7，从列表中移除一项
 				DoublyLinedList.prototype.remove = function(data){
+					return this.removeAt(this.indexOf(data));
 					
 				}
 				//8,如果链表中不含任何元素，返回true,否则返回false
