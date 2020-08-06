@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>封装双向链表</title>
+	</head>
+	<body>
+		<script>
+			// 封装双向链表类
+			function DoublyLinedList(){
+				// 内部节点类
+				function Node(data){
+					this.data = data;
+					this.next = null;
+					this.prev = null;
+				}
+				// 属性
+				this.head = null;
+				this.tail = null;
+				this.length = 0;
+				// 方法
+				//1,向链表尾部添加一个新的项
+				DoublyLinedList.prototype.append = function(data){
+					//1.1,根据data，创建节点
+					var newNode = new Node(data);
+					//1.2，判断添加的是否是第一个节点
+					if(this.length === 0){
+						this.head = newNode;
+						this.tail = newNode;
+					}else{
+						newNode.prev = this.tail;
+						this.tail.next = newNode;
+						this.tail = newNode;
+					}
+					//1.3，length+1
+					this.length += 1;
+				}
+				//2,向链表的特定位置插入一个项
+				DoublyLinedList.prototype.insert = function(position,data){
+					//2.1,position越界判定
+					if(position < 0 || position > this.length){
+						return false;
+					}else{
+						//2.2,创建新节点
+						var newNode = new Node(data);
+						//2.3,判断原链表是否为空
+						if(this.length === 0){
+							this.head = newNode;
+							this.tail = newNode;
+						}else{
+							//2.4,判断position是否为0
+							if(position === 0){
+								this.head.prev = newNode;
+								newNode.next = this.head;
+								this.head = newNode;
+							}else if(position === this.length){
+								//2.5,判断position是否为length
+								newNode.prev = this.tail;
+								this.tail.next = newNode;
+								this.tail = newNode;
+							}else{
+								//2.6,判断position大于0，小于length
+								var current = this.head;
+								var index = 0;
+								while(index++ < position){
+									current = current.next;
+								}
+								newNode.next = current;
+								newNode.prev = current.prev;
+								current.prev.next = newNode;
+								current.prev = newNode;
+							}
+						}
+						//2.7,lengt+1
+						this.length += 1;
+					}
+				}
+				//3,获取对应位置的元素
+				DoublyLinedList.prototype.get = function(position){
+					//3.1,position边界
+					if(position < 0 || position >= this.length){
+						return null;
+					}else{
+						// this.length / 2 > position 从前向后遍历
+	                    // this.length / 2 < position 从后向前遍历
+						//3.2,定义变量
+						if(this.lengt / 2 > position){
+							var current = this.head;
+							var index = 0;
+							//3.3,循环查找position位置对应的元素
+							while(index++ < position){
+								current = current.next;
+							}
+						}else{
+							var current = this.tail;
+							var index = length - 1;
+							//3.3,循环查找position位置对应的元素
+							while(index-- < position){
+								current = current.prev;
+							}
+						}
+						//3.4,返回结果
+						return current.data;
+					}
+				}
+				//4,返回元素在列表中的索引，如果列表中没有该元素则返回-1
+				DoublyLinedList.prototype.indexOf = function(data){
+					//4.1,定义变量
+					var current = this.head;
+					var index = 0;
+					//4.2,循环查找数据为data的位置节点
+					while(current){
+						if(current.data === data){
+							return index;
+						}
+						current = current.next;
+						index += 1;
+					}
+					return -1;
+				}
+				//5,改修某个位置的元素
+				DoublyLinedList.prototype.update = function(position,data){
+					//5.1,position边界
+					if(position < 0 || position >= this.length){
+						return false;
+					}else{
+						// this.length / 2 > position 从前向后遍历
+					    // this.length / 2 < position 从后向前遍历
+						//5.2,定义变量
+						if(this.length / 2 > position){
+							var current = this.head;
+							var index = 0;
+							//5.3,循环查找position位置对应的元素
+							while(index++ < position){
+								current = current.next;
+							}
+						}else{
+							var current = this.tail;
+							var index = length - 1;
+							//5.4,循环查找position位置对应的元素
+							while(index-- < position){
+								current = current.prev;
+							}
+						}
+						//5.4,修改值
+						current.data = data;
+						return true;
+					}
+				}
+				//6,从列表的特定位置移除一项
+				DoublyLinedList.prototype.remove = function(data){
+					
+				}
+				//7，从列表中移除一项
+				DoublyLinedList.prototype.remove = function(data){
+					
+				}
+				//8,如果链表中不含任何元素，返回true,否则返回false
+				DoublyLinedList.prototype.isEmpty = function(){
+					return this.length === 0;
+				}
+				//9,返回链表包含的元素个数
+				DoublyLinedList.prototype.size = function(){
+					return this.length;
+				}
+				//10，重写继承自JS对象的toString方法
+				DoublyLinedList.prototype.toString = function(){
+					return this.backwordString();
+				}
+				//11，返回正向遍历的节点字符串
+				DoublyLinedList.prototype.forwardString = function(){
+					//12.1，定义变量
+					var current = this.tail;
+					var resultString = '';
+					//12.2,循环依次向前遍历，获取每一个节点
+					while(current){
+						resultString += current.data + ' ';
+						current = current.prev;
+					}
+					//12.3,返回结果
+					return resultString;
+				}
+				//12,返回反向遍历的节点字符串
+				DoublyLinedList.prototype.backwordString = function(){
+					//12.1，定义变量
+					var current = this.head;
+					var resultString = '';
+					//12.2,循环依次向后遍历，获取每一个节点
+					while(current){
+						resultString += current.data + ' ';
+						current = current.next;
+					}
+					//12.3,返回结果
+					return resultString;
+				}
+			}
+			
+			// 使用双向链表类
+			var doublyLinedList = new DoublyLinedList();
+		</script>
+	</body>
+</html>

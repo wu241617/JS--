@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			html,body{
+				width:100%;
+				height:100%;
+			}
+			html{
+				font-size:20px;
+			}
+			main,section{
+				display:block;
+			}
+			main{
+				width:30rem;
+				height:auto;
+				margin:2rem auto 0;
+				padding:1rem;
+				box-shadow:0 0 0.5rem 0.5rem #666;
+				border-radius:1rem;
+				font-size:0.7rem;
+				font-family:微软雅黑;
+			}
+			h3{
+				width:100%;
+				height:2rem;
+				text-align:center;
+				line-height:2rem;
+				background-color:black;
+				color:white;
+				margin:0.5rem 0;
+			}
+			ul{
+				list-style-position:inside;
+				padding:1rem;
+			}
+			ul>li{
+				margin:0.5rem 0;
+			}
+		</style>
+		<style>
+			@media (max-width:450px){
+				main{
+					width:auto;
+					height:auto;
+					padding:0;
+					margin:0;
+				}
+			}
+		</style>
+		<title>哈希表</title>
+	</head>
+	<body>
+		<main>
+			<section>
+				<h3>JS数据结构与算法——哈希表</h3>
+				<ul>
+					<li>哈希表通常是基于数组进行实现的，但是相对于数组，它又有很多优势，可以提供非常快速的插入，删除，查找操作。无论多少数据，插入和删除值需要接近常量的实现，O（1）的时间级，实际上，只需要几个指令即可完成。它的速度比树还快，基本可以瞬间查到想要的元素。它相对于树来说，编码容易得多。</li>
+					<li>哈希表相对于数组的一些不足：哈希表中的数据是没有顺序的，所以不能以一种固定的方式（如从小到大）来遍历其中的元素。通常情况下，哈希表中的key是不允许重复的，不能放置相同的key,来保存不能的值。</li>
+					<li>哈希表结构就是数组，但是不同的地方是，对下标值的一种变换，这种变换被称为哈希函数，通过哈希函数可以获取到 HashCode</li>
+				</ul>
+			</section>
+		</main>
+	</body>
+</html>

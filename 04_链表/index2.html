@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			html,body{
+				width:100%;
+				height:100%;
+			}
+			html{
+				font-size:20px;
+			}
+			main{
+				width:30rem;
+				height:auto;
+				margin:2rem auto 0;
+				padding:1rem;
+				box-shadow:0 0 0.5rem 0.5rem #666;
+				font-size:0.7rem;
+			}
+			section,main{
+				display:block;
+			}
+			section>h3{
+				width:100%;
+				height:2rem;
+				text-align:center;
+				line-height:2rem;
+				background-color:black;
+				color:white;
+				margin:0.5rem 0;
+			}
+			ul{
+				list-style-position:inside;
+				padding:1rem;
+			}
+			ul>li{
+				margin:0.5rem 0;
+			}
+		</style>
+		<title>双向链表</title>
+	</head>
+	<body>
+		<main>
+			<section>
+				<h3>JS数据结构与算法——双向链表</h3>
+				<ul>
+					<li>双向链表：即可以从头遍历到尾，也可以从尾遍历到头。它是由两个指针和数据组成的。一个节点，既有向前连接的引用，也有向后连接的引用。它解决了单链表中，修改前一个元素的不方便等操作。</li>
+					<li>双向链表的缺点：每次在插入或者删除某个节点的时候，需要处理四个引用，而不是两个，实现起来要困难。它相对于单向链表来说，占用内存空间更大一点。</li>
+				</ul>
+			</section>
+		</main>
+	</body>
+</html>
