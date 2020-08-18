@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			html,body{
+				width:100%;
+				height:100%;
+			}
+			html{
+				font-size:20px;
+			}
+			main,section{
+				display:block;
+			}
+			main{
+				width:30rem;
+				height:auto;
+				margin:2rem auto 0;
+				padding:1rem;
+				border-radius:1rem;
+				box-shadow:0 0 0.5rem 0.5rem #666;
+				font-size:0.7rem;
+			}
+			h3{
+				width:100%;
+				height:2rem;
+				text-align:center;
+				line-height:2rem;
+				background-color:black;
+				color:white;
+				margin:0.5rem 0;
+			}
+		</style>
+		<style>
+			@media (max-width:450px){
+				main{
+					width:auto;
+					height:auto;
+					padding:0;
+					margin:0;
+				}
+			}
+		</style>
+		<title>把字符串转成数字——哈希化</title>
+	</head>
+	<body>
+		<main>
+			<section>
+				<h3>JS数据结构与算法——哈希表</h3>
+				<ul>
+					<li>哈希化：将大数字转化成数组范围内下标的过程。</li>
+					<li>哈希函数：通常我们把单词转换为大数字，大数字在进行哈希化的代码实现放在一个函数中去做，这个函数就被成为哈希函数。</li>
+					<li>哈希表：最终将数据插入到这个数组，对整个结构的封装，称为一个哈希表。</li>
+					<li>下标转换发生冲突，（重复）—— 解决冲突方法：链地址法（拉链法） 和 开放地址法（寻找空白单元—— 线性探测 / 二次探测 / 再哈希法）</li>
+					<li>哈希表扩容:随着数据量增加，每一个index对应的bucket会越来越长，会造成效率降低。，需要注意的是，在进行扩容时，所有的数据项一定要同时修改。比较常见的情况是loadFactor（装载因子，数组中元素个数 / 数组长度）>0.75的时候进行扩容。</li>
+					<li>容量质数，在链地址法中质数作为容量更利于数据的均匀分布。</li>
+				</ul>
+			</section>
+		</main>
+		<script>
+			// 普通判断质数
+			// 质数，在 2 到 num-1 之间不能被整除
+			function isPrime(num){
+				for(var i=2; i<num.length; i++;){
+					if(num % i == 0){
+						return false;
+					}
+				}
+				return true;
+			}
+			// 优化判断质数(更高效)
+			// 质数，在 2 到 根号下num 之间不能被整除
+			function isPrime1(num){
+				// 定义平方根数
+				var temp = parseInt(Math.sqrt(num));
+				// 循环判断
+				for(var  i=2; i<=temp; i++){
+					if(num % i == 0){
+						return false;
+					}
+				}
+				return true;
+			}
+		</script>
+	</body>
+</html>
