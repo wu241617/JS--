@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+		<title>二叉树</title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+			html,body{
+				width:100%;
+				height:100%;
+			}
+			html{
+				font-size:20px;
+			}
+			main,section{
+				display:block;
+			}
+			main{
+				width:30rem;
+				height:auto;
+				padding:1rem;
+				margin:2rem auto 0;
+				border-radius:1rem;
+				box-shadow:0 0 0.5rem 0.5rem #666;
+				font-size:0.7rem;
+				font-family:微软雅黑;
+			}
+			h3{
+				width:100%;
+				height:2rem;
+				text-align:center;
+				line-height:2rem;
+				background-color:black;
+				color:white;
+				margin:0.5rem 0;
+			}
+			ul{
+				list-style-position:inside;
+				overflow:hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				padding:1rem;
+			}
+			ul>li{
+				margin:0.5rem 0;
+			}
+		</style>
+		<style>
+			@media (max-width:450px){
+				main{
+					width:auto;
+					height:auto;
+					padding:0;
+					margin:0;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<section>
+				<h3>二叉树</h3>
+				<ul>
+					<li>任何一个树，最终都可以转换为二叉树。</li>
+					<li>如果树中每个节点最多只能有两个子节点，这样的树就成为二叉树。</li>
+					<li>二叉树可以为空，也就是没有节点。若不为空，则它是由根节点和左子树TL，右子树TR两个不相交的二叉树组成。</li>
+				</ul>
+			</section>
+			<section>
+				<h3>二叉树的重要特性</h3>
+				<ul>
+					<li>一个二叉树第 i 层的最大节点数为：2^(i-1),i>=1</li>
+					<li>深度为 k 的二叉树有最大节点总数：2^k-1,k>=1</li>
+					<li>对任何非空二叉树 T ，若n1表示叶子节点个数；n2是度为2的非叶子节点个数，则存在 n1=n2+1 的关系</li>
+				</ul>
+			</section>
+			<section>
+				<h3>特殊的两种二叉树</h3>
+				<ul>
+					<li>完美二叉树（满二叉树）：除了最下一层的叶节点外，每层节点都有2个子节点。</li>
+					<li>完全二叉树：除二叉树的最后一层外，其他各层的节点数都达到最大个数。且最后一层从左到右的叶节点连续存在，只缺右侧若干节点，完美二叉树（满二叉树）是特殊的完全二叉树。</li>
+				</ul>
+			</section>
+			<section>
+				<h3>二叉树的存储</h3>
+				<ul>
+					<li>二叉树的常见存储方法为，数组和链表</li>
+				</ul>
+			</section>
+		</main>
+	</body>
+</html>
