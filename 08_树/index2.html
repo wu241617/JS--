@@ -4,48 +4,57 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,viewport-fit=cover,user-scalable=no">
 		<style type="text/css">
-			*{
-				margin:0;
-				padding:0;
+			* {
+				margin: 0;
+				padding: 0;
 			}
-			html,body{
-				width:100%;
-				height:100%;
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
 			}
-			html{
-				font-size:20px;
+
+			html {
+				font-size: 20px;
 			}
-			main,section{
-				display:block;
+
+			main,
+			section {
+				display: block;
 			}
-			main{
-				width:30rem;
-				height:auto;
-				padding:1rem;
-				margin:2rem auto 0;
+
+			main {
+				width: 30rem;
+				height: auto;
+				padding: 1rem;
+				margin: 2rem auto 0;
 				box-shadow: 0 0 0.5rem 0.5rem #666;
-				border-radius:1rem;
-				font-size:0.7rem;
-				font-family:微软雅黑;
+				border-radius: 1rem;
+				font-size: 0.7rem;
+				font-family: 微软雅黑;
 			}
-			h3{
-				width:100%;
-				height:2rem;
-				text-align:center;
-				line-height:2rem;
-				background-color:black;
-				color:white;
-				margin:0.5rem 0;
+
+			h3 {
+				width: 100%;
+				height: 2rem;
+				text-align: center;
+				line-height: 2rem;
+				background-color: black;
+				color: white;
+				margin: 0.5rem 0;
 			}
-			ul{
-				list-style-position:inside;
-				overflow:hidden;
-				white-space:nowrap;
-				text-overflow:ellipsis;
-				padding:1rem;
+
+			ul {
+				list-style-position: inside;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				padding: 1rem;
 			}
-			ul>li{
-				margin:0.5rem 0;
+
+			ul>li {
+				margin: 0.5rem 0;
 			}
 		</style>
 		<style>
@@ -65,17 +74,17 @@
 			<section>
 				<h3>遍历二叉搜索树</h3>
 				<ul>
-					<li>先序遍历：</li>
-					<li>中序遍历：</li>
-					<li>后序遍历：</li>
+					<li>先序遍历：1，访问根节点；2，先序遍历其左子树；3，先序遍历其右子树。</li>
+					<li>中序遍历：1，中序遍历其左子树；2，访问根节点；3，中序遍历其右子树。</li>
+					<li>后序遍历：1，中序遍历其左子树；2，中序遍历其右子树。3，访问根节点；</li>
 					<li>层序遍历：一层一层遍历，可以使用队列完成。</li>
 				</ul>
 			</section>
 		</main>
 		<script type="text/javascript">
 			// 封装二叉搜索树
-			function BinarySearchTree(){
-				function Node(key){
+			function BinarySearchTree() {
+				function Node(key) {
 					this.key = key;
 					this.left = null;
 					this.right = null;
@@ -84,57 +93,196 @@
 				this.root = null;
 				// 方法
 				// 1,向树中插入一个新的键
-				 BinarySearchTree.prototype.insert = function(key){
-					 // 根据 key 创建节点
-					 var newNode = new Node(key);
-					 // 判断根节点是否有值
-					 if(this.root === null){
-						 this.root = newNode;
-					 }else{
+				BinarySearchTree.prototype.insert = function(key) {
+					// 根据 key 创建节点
+					var newNode = new Node(key);
+					// 判断根节点是否有值
+					if (this.root === null) {
+						this.root = newNode;
+					} else {
 						this.insertNode(this.root, newNode);
-					 }
-				 }
-				 BinarySearchTree.prototype.insertNode = function(node, newNode){
-					 if(newNode.key < node.key){ // 向左查找
-						 if(node.left === null){
-							 node.left = newNode;
-						 }else{
-							 this.insertNode(node.left, newNode);
-						 }
-					 	 
-					 }else{ // 向右查找
-					 	if(node.right === null){
-					 		 node.right = newNode;
-					 	}else{
-					 		 this.insertNode(node.right, newNode);
-					 	}
-					 }
-				 }
-				 // 2，在树中查找一个键，如果节点存在，则返回ture;如果不存在，则返回false. 
-				 BinarySearchTree.prototype.search = function(key){}
-				 // 3,通过中序遍历方式遍历所有节点
-				 BinarySearchTree.prototype.inOrderTraverse = function(){}
-				 // 4，通过先序遍历方式遍历所有节点
-				 BinarySearchTree.prototype.preOrderTraverse = function(){}
-				 // 5，通过后序遍历方式遍历所有节点
-				 BinarySearchTree.prototype.postOrderTraverse = function(){}
-				 // 6，返回树中最小的值/键
-				 BinarySearchTree.prototype.min = function(){}
-				 // 7，返回树中最大的值 / 键
-				 BinarySearchTree.prototype.max = function(){}
-				 // 8，从树中移除某个键
-				 BinarySearchTree.prototype.remove = function(key){}
+					}
+				}
+				BinarySearchTree.prototype.insertNode = function(node, newNode) {
+					if (newNode.key < node.key) { // 向左查找
+						if (node.left === null) {
+							node.left = newNode;
+						} else {
+							this.insertNode(node.left, newNode);
+						}
+
+					} else { // 向右查找
+						if (node.right === null) {
+							node.right = newNode;
+						} else {
+							this.insertNode(node.right, newNode);
+						}
+					}
+				}
+				// 2，在树中查找一个键，如果节点存在，则返回ture;如果不存在，则返回false. 
+				BinarySearchTree.prototype.search = function(key) {
+					return this.searchNode(this.root, key);
+				}
+				BinarySearchTree.prototype.searchNode = function(node, key) {
+					// 1.如果传入的 node 为空，退出递归
+					if (node === null) {
+						return false;
+					}
+					// 2, 判断 node 节点的值和传入 key 的大小
+					if (node.key > key) {
+						return this.searchNode(node.left, key);
+					} else if (node.key < key) {
+						return this.searchNode(node.right, key);
+					} else {
+						return true;
+					}
+				}
+				// 3,通过中序遍历方式遍历所有节点
+				BinarySearchTree.prototype.minOrderTraverse = function(handle) {
+					this.minOrderTraverseNode(this.root, handle)
+				}
+				BinarySearchTree.prototype.minOrderTraverseNode = function(node, handle) {
+					if (node !== null) {
+						// 1，处理经过节点的左子节点
+						this.minOrderTraverseNode(node.left, handle);
+						// 2,处理经过的节点
+						handle(node.key);
+						//3，处理经过节点的右子节点
+						this.minOrderTraverseNode(node.right, handle);
+					}
+				}
+				// 4，通过先序遍历方式遍历所有节点
+				BinarySearchTree.prototype.preOrderTraverse = function(handle) {
+					this.preOrderTraverseNode(this.root, handle);
+				}
+				BinarySearchTree.prototype.preOrderTraverseNode = function(node, handle) {
+					if (node !== null) {
+						// 1,处理经过的节点
+						handle(node.key);
+						// 2，处理经过节点的左子节点
+						this.preOrderTraverseNode(node.left, handle);
+						//3，处理经过节点的右子节点
+						this.preOrderTraverseNode(node.right, handle);
+					}
+				}
+				// 5，通过后序遍历方式遍历所有节点
+				BinarySearchTree.prototype.postOrderTraverse = function(handle) {
+					this.postOrderTraverseNode(this.root, handle);
+				}
+				BinarySearchTree.prototype.postOrderTraverseNode = function(node, handle) {
+					if (node !== null) {
+						// 1，处理经过节点的左子节点
+						this.postOrderTraverseNode(node.left, handle);
+						//2，处理经过节点的右子节点
+						this.postOrderTraverseNode(node.right, handle);
+						// 3,处理经过的节点
+						handle(node.key);
+					}
+				}
+				// 6，返回树中最小的值/键
+				BinarySearchTree.prototype.min = function() {
+					// 1,获取根节点
+					var node = this.root;
+					// 2，依次向右不断查找，直到节点为null
+					while (node.left !== null) {
+						node = node.left;
+					}
+					return node.key;
+				}
+				// 7，返回树中最大的值 / 键
+				BinarySearchTree.prototype.max = function() {
+					// 1,获取根节点
+					var node = this.root;
+					while (node.right !== null) {
+						node = node.right;
+					}
+					// 2，依次向右不断查找，直到节点为null
+					return node.key;
+				}
+				// 8，从树中移除某个键
+				BinarySearchTree.prototype.remove = function(key) {
+					// 1.先找到要删除的节点，如果没有找到，不需要删除
+					// 1.1，定义变量，保存一些信息
+					var current = this.root;
+					var parent = null;
+					var isLeftChild = true;
+					// 1.2，开始寻找删除的节点
+					while (current.key !== key) {
+						parent = current;
+						if (key < current.key) {
+							isLeftChild = true;
+							current = current.left;
+						} else {
+							isLeftChild = false;
+							current = current.right;
+						}
+						// 某种情况，已经找到最后的节点，依然没有找到 === key
+						if (current === null) {
+							return false;
+						}
+					}
+
+					// 2.1，找到要删除的节点，删除节点为子节点。
+					if (current.left === null && current.right === null) {
+						if (current === this.root) {
+							this.root = null;
+						} else if (isLeftChild) {
+							parent.left = null;
+						} else {
+							parent.right = null;
+						}
+					}
+					// 2.2，找到要删除的节点，删除节点只有一个子节点。
+					// 2.3，找到要删除的节点，删除节点有两个子节点。
+
+				}
 			}
-			
+			// 创建 BinarySearchTree 实例对象
 			var bts = new BinarySearchTree();
-			bts.insert(23);
-			bts.insert(34);
-			bts.insert(22);
-			bts.insert(67);
-			bts.insert(63);
-			bts.insert(76);
-			bts.insert(85);
-			bts.insert(32);
+			// 插入数据
+			bts.insert(11);
+			bts.insert(7);
+			bts.insert(15);
+			bts.insert(5);
+			bts.insert(3);
+			bts.insert(9);
+			bts.insert(8);
+			bts.insert(10);
+			bts.insert(13);
+			bts.insert(12);
+			bts.insert(14);
+			bts.insert(20);
+			bts.insert(18);
+			bts.insert(25);
+			bts.insert(6);
+			// 先序遍历测试
+			var result = '';
+			bts.preOrderTraverse(function(key) {
+				result += key + ' ';
+			})
+			console.log("先序遍历：" + result);
+			// 中序遍历测试
+			result = '';
+			bts.minOrderTraverse(function(key) {
+				result += key + ' ';
+			})
+			console.log("中序遍历：" + result);
+			// 后序遍历测试
+			result = '';
+			bts.postOrderTraverse(function(key) {
+				result += key + ' ';
+			})
+			console.log("后序遍历：" + result);
+			var minValue = bts.min();
+			console.log("最小值：" + minValue);
+			var maxValue = bts.max();
+			console.log("最大值：" + maxValue);
+			var key = 24;
+			if (bts.search(key)) {
+				console.log('key = ' + key + ' , 该元素存在！');
+			} else {
+				console.log('key = ' + key + ' , 该元素不存在！');
+			}
 		</script>
 	</body>
 </html>
