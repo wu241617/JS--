@@ -200,89 +200,76 @@
 					return node.key;
 				}
 				// 8，从树中移除某个键
+				/**
+				 * 删除目标节点
+				 * @param   data 待删除目标节点的值
+				 */
 				BinarySearchTree.prototype.remove = function(key) {
-					// 1.先找到要删除的节点，如果没有找到，不需要删除
-					// 1.1，定义变量，保存一些信息
-					var current = this.root;
-					var parent = null;
-					var isLeftChild = true;
-					// 1.2，开始寻找删除的节点
-					while (current.key !== key) {
-						parent = current;
-						if (key < current.key) {
-							isLeftChild = true;
-							current = current.left;
-						} else {
-							isLeftChild = false;
-							current = current.right;
-						}
-						// 某种情况，已经找到最后的节点，依然没有找到 === key
-						if (current === null) {
-							return false;
-						}
-					}
-
-					// 2.1，找到要删除的节点，删除节点为子节点。
-					if (current.left === null && current.right === null) {
-						if (current === this.root) {
-							this.root = null;
-						} else if (isLeftChild) {
-							parent.left = null;
-						} else {
-							parent.right = null;
-						}
-					}
-					// 2.2，找到要删除的节点，删除节点只有一个子节点。
-					// 2.3，找到要删除的节点，删除节点有两个子节点。
-
+					return key;
 				}
 			}
-			// 创建 BinarySearchTree 实例对象
-			var bts = new BinarySearchTree();
-			// 插入数据
-			bts.insert(11);
-			bts.insert(7);
-			bts.insert(15);
-			bts.insert(5);
-			bts.insert(3);
-			bts.insert(9);
-			bts.insert(8);
-			bts.insert(10);
-			bts.insert(13);
-			bts.insert(12);
-			bts.insert(14);
-			bts.insert(20);
-			bts.insert(18);
-			bts.insert(25);
-			bts.insert(6);
-			// 先序遍历测试
-			var result = '';
-			bts.preOrderTraverse(function(key) {
-				result += key + ' ';
-			})
-			console.log("先序遍历：" + result);
-			// 中序遍历测试
-			result = '';
-			bts.minOrderTraverse(function(key) {
-				result += key + ' ';
-			})
-			console.log("中序遍历：" + result);
-			// 后序遍历测试
-			result = '';
-			bts.postOrderTraverse(function(key) {
-				result += key + ' ';
-			})
-			console.log("后序遍历：" + result);
-			var minValue = bts.min();
-			console.log("最小值：" + minValue);
-			var maxValue = bts.max();
-			console.log("最大值：" + maxValue);
-			var key = 24;
-			if (bts.search(key)) {
-				console.log('key = ' + key + ' , 该元素存在！');
-			} else {
-				console.log('key = ' + key + ' , 该元素不存在！');
-			}
+				// 创建 BinarySearchTree 实例对象
+				var bts = new BinarySearchTree();
+				// 插入数据
+				bts.insert(11);
+				bts.insert(7);
+				bts.insert(15);
+				bts.insert(5);
+				bts.insert(3);
+				bts.insert(9);
+				bts.insert(8);
+				bts.insert(10);
+				bts.insert(13);
+				bts.insert(12);
+				bts.insert(14);
+				bts.insert(20);
+				bts.insert(18);
+				bts.insert(25);
+				bts.insert(6);
+				// 先序遍历测试
+				var result = '';
+				bts.preOrderTraverse(function(key) {
+					result += key + ' ';
+				})
+				console.log("先序遍历：" + result);
+				// 中序遍历测试
+				result = '';
+				bts.minOrderTraverse(function(key) {
+					result += key + ' ';
+				})
+				console.log("中序遍历：" + result);
+				// 后序遍历测试
+				result = '';
+				bts.postOrderTraverse(function(key) {
+					result += key + ' ';
+				})
+				console.log("后序遍历：" + result);
+				var minValue = bts.min();
+				console.log("最小值：" + minValue);
+				var maxValue = bts.max();
+				console.log("最大值：" + maxValue);
+				var key = 24;
+				if (bts.search(key)) {
+					console.log('key = ' + key + ' , 该元素存在！');
+				} else {
+					console.log('key = ' + key + ' , 该元素不存在！');
+				}
+				// 删除25
+				console.log(bts.remove(25));
+				// 先序遍历测试
+				var result = '';
+				bts.preOrderTraverse(function(key) {
+					result += key + ' ';
+				})
+				console.log("先序遍历：" + result);
+				// 删除11
+				//console.log(bts.remove(11));
+				// 先序遍历测试
+				// var result = '';
+				// bts.preOrderTraverse(function(key) {
+				// 	result += key + ' ';
+				// })
+				// console.log("先序遍历：" + result);
 		</script>
 	</body>
 </html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>JS——实现二叉搜索树</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function BinarySearchTree() {
+				// 属性，根节点
+				this.root = null;
+				// 内部类：Node节点类
+				function Node(key) {
+					this.key = key;
+					this.left = null;
+					this.right = null;
+				}
+
+				// 方法
+				// insert(key)：向树中插入一个新的key  
+				BinarySearchTree.prototype.insert = function(key) {
+					// 创建新节点
+					var newNode = new Node(key);
+					// 判断根节点是否为空
+					if (this.root == null) {
+						this.root = newNode;
+					} else {
+						this.insertNode(this.root, newNode);
+					}
+				}
+				// insertNode(node, newNode)：插入的递归方法
+				BinarySearchTree.prototype.insertNode = function(node, newNode) {
+					if (newNode.key < node.key) {
+						// 向左查找
+						if (node.left == null) {
+							node.left = newNode;
+						} else {
+							this.insertNode(node.left, newNode);
+						}
+					} else {
+						// 向右查找
+						if (node.right == null) {
+							node.right = newNode;
+						} else {
+							this.insertNode(node.right, newNode);
+						}
+					}
+				}
+				// search(key)：在树中查找一个 key，是否存在
+				BinarySearchTree.prototype.search = function(key) {
+					var node = this.root;
+					while (node) {
+						if (node.key == key) {
+							return true;
+						} else if (node.key < key) {
+							node = node.right;
+						} else {
+							node = node.left;
+						}
+					}
+					return false;
+				}
+				// preOrderTraverse：通过先序遍历遍历树
+				BinarySearchTree.prototype.preOrderTraverse = function(callback) {
+					this.preOrderTraverseNode(this.root, callback);
+				}
+				// preOrderTraverseNode：先序遍历的递归函数
+				BinarySearchTree.prototype.preOrderTraverseNode = function(node, callback) {
+					if (node) {
+						callback(node.key);
+						this.preOrderTraverseNode(node.left, callback);
+						this.preOrderTraverseNode(node.right, callback);
+					}
+				}
+				// inOrderTraverse：通过中序遍历遍历树
+				BinarySearchTree.prototype.inOrderTraverse = function(callback) {
+					this.inOrderTraverseNode(this.root, callback);
+				}
+				// inOrderTraverseNode：中序遍历的递归函数
+				BinarySearchTree.prototype.inOrderTraverseNode = function(node, callback) {
+					if (node) {
+						this.inOrderTraverseNode(node.left, callback);
+						callback(node.key);
+						this.inOrderTraverseNode(node.right, callback);
+					}
+				}
+				// postOrderTraverse：通过后序遍历遍历树
+				BinarySearchTree.prototype.postOrderTraverse = function(callback) {
+					this.postOrderTraverseNode(this.root, callback);
+				}
+				// postOrderTraverseNode：后序遍历的递归函数
+				BinarySearchTree.prototype.postOrderTraverseNode = function(node, callback) {
+					if (node) {
+						this.postOrderTraverseNode(node.left, callback);
+						this.postOrderTraverseNode(node.right, callback);
+						callback(node.key);
+					}
+				}
+				// getRoot()：返回树的根节点
+				BinarySearchTree.prototype.getRoot = function() {
+					return this.root;
+				}
+				// mix()：返回树中最小的key
+				BinarySearchTree.prototype.mix = function() {
+					var node = this.root;
+					if (this.root == null) {
+						return null;
+					}
+					if (node) {
+						while (node && node.left) {
+							node = node.left;
+						}
+					}
+					return node.key;
+				}
+				// max：返回树中最大的key
+				BinarySearchTree.prototype.max = function() {
+					var node = this.root;
+					if (this.root == null) {
+						return null;
+					}
+					if (node) {
+						while (node && node.right) {
+							node = node.right;
+						}
+					}
+					return node.key;
+				}
+				// remove(key)：从树中移除某个key
+				BinarySearchTree.prototype.remove = function(key) {
+					// 先判断是否存在key，如果不存在，则直接return 0
+					if (!this.search(key)) return false;
+					this.removeNode(this.root, key);
+				}
+				BinarySearchTree.prototype.removeNode = function(node, key) {
+					if (node == null)
+						return null;
+					if (node.key > key) {
+						node.left = this.removeNode(node.left, key);
+					} else if (node.key < key) {
+						node.right = this.removeNode(node.right, key);
+					} else { // 找到要删除的节点
+						// 要删除的节点是叶子节点，直接让该节点为null
+						if (node.left == null && node.right == null) {
+							node = null;
+						}
+						// 要删除的节点有一个子节点，则把要删除的节点替换为它的子节点
+						else if (node.left == null) {
+							node = node.right;
+						} else if (node.right == null) {
+							node = node.left;
+						}
+						// 要删除的节点有两个子节点，这时可以用左子树里的最大节点来替换要删除的节点，也可以用右子树里的最小节点来替换要删除的节点
+						// 这里我采用左子树的最大节点来替换
+						else {
+							// 找到要删除的节点的左子树里最大的值
+							var LeftMax = this.getLeftMax(node.left);
+							// 让要删除的节点的key等于刚才找到的左子树里最大值的key，保证了要删除的节点只改变了key，左右子树不变
+							node.key = LeftMax.key;
+							// 让要删除的节点的左子树里删除它的最大值
+							node.left = this.removeNode(node.left, LeftMax.key);
+						}
+					}
+					return node;
+				}
+				BinarySearchTree.prototype.getLeftMax = function(node) {
+					if (node) {
+						while (node && node.right) {
+							node = node.right;
+						}
+						return node;
+					}
+					return null;
+				}
+			}
+
+			// 测试：
+			var bst = new BinarySearchTree();
+			// 插入数据
+			bst.insert(11);
+			bst.insert(7);
+			bst.insert(15);
+			bst.insert(5);
+			bst.insert(3);
+			bst.insert(9);
+			bst.insert(8);
+			bst.insert(10);
+			bst.insert(13);
+			bst.insert(12);
+			bst.insert(14);
+			bst.insert(20);
+			bst.insert(18);
+			bst.insert(25);
+			bst.insert(6);
+			// 先序遍历
+			var result = "";
+			bst.preOrderTraverse(function(key) {
+				result += key + "  ";
+			});
+			console.log("先序遍历：" + result);// 11  7  5  3  6  9  8  10  15  13  12  14  20  18  25 
+			// 中序遍历 
+			result = "";
+			bst.inOrderTraverse(function(key) {
+				result += key + "  ";
+			});
+			console.log("中序遍历：" + result);// 3  5  6  7  8  9  10  11  12  13  14  15  18  20  25
+			// 后序遍历：
+			result = "";
+			bst.postOrderTraverse(function(key) {
+				result += key + "  ";
+			});
+			console.log("后序遍历：" + result);// 3  6  5  8  10  9  7  12  14  13  18  25  20  15  11
+			// 最小值
+			console.log('min：' + bst.mix(bst.getRoot())); // 2
+			// 最大值
+			console.log('max：' + bst.max(bst.getRoot())); // 57
+			// 查找元素是否存在
+			var key1 = 18;
+			var key2 = 99;
+			console.log(bst.search(key1) ? key1 + ': 该元素存在！' : key1 + ': 该元素不存在！'); // true
+			console.log(bst.search(key2) ? key2 + ': 该元素存在！' : key2 + ': 该元素不存在！'); // false
+			// 删除元素
+			var key3 = 10;
+			console.log(!bst.remove(key3) ? key3 +': 该元素已删除！' : key3 + ': 该元素不存在！');
+			// 先序遍历
+			var result = "";
+			bst.preOrderTraverse(function(key) {
+				result += key + "  ";
+			});
+			console.log("先序遍历：" + result);// 9  8  4  2  6  18  10  57
+		</script>
+	</body>
+</html>
