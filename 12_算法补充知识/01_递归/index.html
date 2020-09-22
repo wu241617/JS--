@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+			html,body{
+				width:100%;
+				height:100%;
+			}
+			html{
+				font-size:20px;
+			}
+			main,section{
+				display:block;
+			}
+			main{
+				width:30rem;
+				height:auto;
+				padding:1rem;
+				margin:2rem auto 0;
+				box-shadow:0 0 0.5rem 0.5rem #666;
+				border-radius:1rem;
+				font-size:0.7rem;
+				font-family:微软雅黑;
+			}
+			h3{
+				width:100%;
+				height:2rem;
+				text-align:center;
+				line-height:2rem;
+				background-color:black;
+				color:white;
+				margin:0.5rem 0;
+			}
+			ul{
+				list-style-position:inside;
+				padding:1rem;
+			}
+			ul>li{
+				margin:0.5rem 0;
+			}
+		</style>
+		<style>
+			@media (max-width:450px){
+				main{
+					width:auto;
+					height:auto;
+					padding:0;
+					margin:0;
+				}
+			}
+		</style>
+		<title>递归</title>
+	</head>
+	<body>
+		<main>
+			<section>
+				<h3>递归</h3>
+				<ul>
+					<li>递归是一种解决问题的方法，它解决问题的各个小部分，直到解决最初的大问题。通常涉及函数调用自身。</li>
+					<li>每个递归函数都必须要有边界条件，即一个不再递归调用的条件（停止点），以防止无限递归。</li>
+					<li>JS调用栈大小的限制。如果忘记加上用以停止函数递归调用的边界条件，递归并不会无限执行下去；浏览器会抛出错误，也就是所谓的栈溢出错误。</li>
+					<li>斐波那契数列:（递归和非递归方法实现）递归更容易理解，并且它所需的代码量更少。</li>
+				</ul>
+			</section>
+		</main>
+		<script type="text/text/javascript">
+			// 递归实现，斐波那契数列
+			function fibonacci(num){
+				if(num === 1 || num === 2){
+					return 1;
+				}
+				return fibonacci(num - 1) + fibonacci(num - 2);
+			}
+			// 非递归实现，斐波那契数列
+			function fibonacci1(num){
+				var n1 = n2 = n = 1;
+				for(var i=3; i<num; i++){
+					n = n1 + n2;
+					n1 = n2;
+					n2 = n;
+				}
+				return n;
+			}
+		</script>
+	</body>
+</html>

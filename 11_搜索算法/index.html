@@ -4,45 +4,54 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
 		<style type="text/css">
-			*{
-				margin:0;
-				padding:0;
+			* {
+				margin: 0;
+				padding: 0;
 			}
-			html,body{
-				width:100%;
-				height:100%;
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
 			}
-			html{
-				font-size:20px;
+
+			html {
+				font-size: 20px;
 			}
-			main,section{
-				display:block;
+
+			main,
+			section {
+				display: block;
 			}
-			main{
-				width:30rem;
-				height:auto;
-				margin:2rem auto 0;
-				padding:1rem;
-				border-radius:1rem;
-				box-shadow:0 0 0.5rem 0.5rem #666;
-				font-size:0.7rem;
-				font-family:微软雅黑;
+
+			main {
+				width: 30rem;
+				height: auto;
+				margin: 2rem auto 0;
+				padding: 1rem;
+				border-radius: 1rem;
+				box-shadow: 0 0 0.5rem 0.5rem #666;
+				font-size: 0.7rem;
+				font-family: 微软雅黑;
 			}
-			h3{
-				width:100%;
-				height:2rem;
-				text-align:center;
-				line-height:2rem;
-				background-color:black;
-				color:white;
-				margin:0.5rem 0;
+
+			h3 {
+				width: 100%;
+				height: 2rem;
+				text-align: center;
+				line-height: 2rem;
+				background-color: black;
+				color: white;
+				margin: 0.5rem 0;
 			}
-			ul{
-				list-style-position:inside;
-				padding:1rem;
+
+			ul {
+				list-style-position: inside;
+				padding: 1rem;
 			}
-			ul>li{
-				margin:0.5rem 0;
+
+			ul>li {
+				margin: 0.5rem 0;
 			}
 		</style>
 		<style>
@@ -63,42 +72,42 @@
 				<h3>搜索算法</h3>
 				<ul>
 					<li>顺序搜索：顺序或线性搜索是最基本的搜索算法。它的机制是，将每一个数据结构中的元素和我们要找的元素做比较。顺序搜索是最低效的一种搜索算法。</li>
-					<li>二分搜索：这个算法要求被搜索的数据结构已排序。以下是该算法遵循的步骤：(1) 选择数组的中间值(2) 如果选中值是待搜索值，那么算法执行完毕（值找到了）。(3) 如果待搜索值比选中值要小，则返回步骤1并在选中值左边的子数组中寻找。(4) 如果待搜索值比选中值要大，则返回步骤1并在选种值右边的子数组中寻找。</li>
+					<li>二分搜索：这个算法要求被搜索的数据结构已排序。以下是该算法遵循的步骤：(1) 选择数组的中间值(2) 如果选中值是待搜索值，那么算法执行完毕（值找到了）。(3)如果待搜索值比选中值要小，则返回步骤1并在选中值左边的子数组中寻找。(4) 如果待搜索值比选中值要大，则返回步骤1并在选种值右边的子数组中寻找。</li>
 				</ul>
 			</section>
 			<script type="text/javascript">
 				// 顺序查找
-				var sequentialSearch = function(arr, item){
-					for(var i=0; i<arr.length; i++){
-						if(item === arr[i]){
+				var sequentialSearch = function(arr, item) {
+					for (var i = 0; i < arr.length; i++) {
+						if (item === arr[i]) {
 							return i;
 						}
 					}
 					return -1;
 				}
 				// 二分查找
-				var binarySearch = function(newArr, item){
+				var binarySearch = function(newArr, item) {
 					var low = mid = element = 0;
 					var high = newArr.length - 1;
-					while(low <= high){
+					while (low <= high) {
 						mid = Math.floor((low + high) / 2);
 						element = newArr[mid];
-						if(element < item){
+						if (element < item) {
 							low = mid + 1;
-						}else if(element > item){
+						} else if (element > item) {
 							high = mid - 1;
-						}else{
+						} else {
 							return mid;
 						}
 					}
 					return -1;
 				}
-				
+
 				// -------------------测试
-				var arr = [45,67,43,21,56,86,42,32];
-				var newArr = arr.sort(function(a,b){
-					return a-b;
-					});
+				var arr = [45, 67, 43, 21, 56, 86, 42, 32];
+				var newArr = arr.sort(function(a, b) {
+					return a - b;
+				});
 				console.log(sequentialSearch(newArr, 45))
 				console.log(binarySearch(newArr, 45));
 			</script>
