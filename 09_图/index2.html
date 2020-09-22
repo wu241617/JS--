@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			html {
+				font-size: 20px;
+			}
+
+			main,
+			section {
+				display: block;
+			}
+
+			main {
+				width: 30rem;
+				height: auto;
+				margin: 2rem auto 0;
+				padding: 1rem;
+				box-shadow: 0 0 0.5rem 0.5rem #666;
+				border-radius: 1rem;
+				font-size: 0.7rem;
+				font-family: 微软雅黑;
+			}
+
+			h3 {
+				width: 100%;
+				height: 2rem;
+				text-align: center;
+				line-height: 2rem;
+				background-color: black;
+				color: white;
+				margin: 0.5rem 0;
+			}
+
+			ul {
+				list-style-position: inside;
+				padding: 1rem;
+			}
+
+			ul>li {
+				margin: 0.5rem 0;
+			}
+		</style>
+		<style>
+			@media (max-width:450px){
+				main{
+					width:auto;
+					height:auto;
+					padding:0;
+					margin:0;
+				}
+			}
+		</style>
+		<title>图的遍历</title>
+	</head>
+	<body>
+		<main>
+			<section>
+				<h3>图的遍历</h3>
+				<ul>
+					<li>图的遍历通常有长度优先遍历和深度优先遍历。</li>
+					<li>图遍历可以用来寻找特定的顶点或寻找两个顶点之间的路径，检查图是否连通，检查图是否含有环等。</li>
+					<li>图遍历算法的思想是必须追踪每个第一次访问的节点，并且追踪哪些节点还没有被完全探索。完全探索一个顶点要求我们查看该顶点的每一条边。对于每一条边所连接的没有被访问过的顶点，将其标注为被发现，并将其加入待访问顶点列表中。为了保证算法的效率，务必访问每个顶点至多两次。</li>
+					<li>当要标注已经访问过的顶点时，我们用三种颜色来反映它们的状态。白色：表示该顶点还没有被访问。灰色：表示该顶点被访问过，但并未被探索过。黑色：表示该顶点被访问过且被完全探索过。这就是之前提到的务必访问每个顶点最多两次的原因</li>
+				</ul>
+			</section>
+			<section>
+				<h3>广度优先搜索（BFS）</h3>
+				<ul>
+					<li>通过将顶点存入队列中，最先入队列的顶点先被探索。</li>
+					<li>广度优先搜索算法会从指定的第一个顶点开始遍历图，先访问其所有的相邻点，就像一次访问图的一层。</li>
+					<li>从顶点v开始的广度优先搜索算法所遵循的步骤。(1) 创建一个队列Q。(2) 将v标注为被发现的（灰色），并将v入队列Q。(3) 如果Q非空，则运行以下步骤：(a) 将u从Q中出队列；(b)将标注u为被发现的（灰色）；(c) 将u所有未被访问过的邻点（白色）入队列；(d) 将u标注为已被探索的（黑色）。</li>
+					<li>使用BFS寻找最短路径</li>
+				</ul>
+			</section>
+			<section>
+				<h3>深度优先搜索（DFS）</h3>
+				<ul>
+					<li>通过将顶点存放在栈中，顶点是沿着路径被探索的，存在新的相邻节点就去访问。</li>
+					<li>深度优先搜索算法将会从第一个指定的顶点开始遍历图，沿着路径直到这条路径最后一个顶点被访问了，接着原路回退并探索下一条路径。深度优先搜索算法不需要一个源顶点。在深度优先搜索算法中，若图中顶点v未访问，则访问该顶点v。访问顶点</li>
+					<li>访问顶点v:(1) 标注v为被发现的（灰色）(2) 对于v的所有未访问的邻点w：(a) 访问顶点w。(3)标注v为已被探索的（黑色）。深度优先搜索的步骤是递归的，这意味着深度优先搜索算法使用栈来存储函数调用（由递归调用所创建的栈）。</li>
+						<li>拓扑排序——使用深度优先搜索</li>
+				</ul>
+			</section>
+		</main>
+		<script type="text/javascript">
+			// 实现广度优先搜索算法
+			Dictionary.prototype.initalizeColor = function() {
+				var color = [];
+				for (var i = 0; i < this.vertices.length; i++) {
+					color[this.vertices[i]] = 'white';
+				}
+				return color;
+			}
+			Dictionary.prototype.bfs = function(v, callback) {
+				var color = that.initalizeColor();
+				var queue = new Queue();
+				queue.enqueue(v);
+				while (!queue.isEmpty()) {
+					var u = queue.dequeue();
+					var neighbors = adjList.get(u);
+					color[u] = 'grey';
+					for (var i = 0; i < neighbors.length; i++) {
+						var w = neighbors[i];
+						if (color[w] === 'white') {
+							color[w] = 'grey';
+							queue.enqueue(w);
+						}
+					}
+					color[u] = 'black';
+					if (callback) {
+						callback(u);
+					}
+				}
+			}
+
+			// 实现广度优先算法
+			Dictionary.prototype.dfs = function(callback) {
+				var color = initializeColor();
+				for (var i = 0; i < this.vertices.length; i++) { //{2} 
+					if (color[vertices[i]] === 'white') { //{3} 
+						dfsVisit(this.vertices[i], color, callback); //{4} 
+					}
+				}
+			};
+			Dictionary.prototype.dfsVisit = function(u, color, callback) {
+				color[u] = 'grey'; //{5} 
+				if (callback) { //{6} 
+					callback(u);
+				}
+				var neighbors = adjList.get(u); //{7} 
+				for (var i = 0; i < neighbors.length; i++) { //{8} 
+					var w = neighbors[i]; //{9} 
+					if (color[w] === 'white') { //{10} 
+						dfsVisit(w, color, callback); //{11} 
+					}
+				}
+				color[u] = 'black'; //{12} 
+			};
+		</script>
+	</body>
+</html>

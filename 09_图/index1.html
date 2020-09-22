@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+			html,body{
+				width:100%;
+				height:100%;
+			}
+			html{
+				font-size:20px;
+			}
+			main,section{
+				display:block;
+			}
+			main{
+				width:30rem;
+				height:auto;
+				padding:1rem;
+				margin:2rem auto 0;
+				box-shadow:0 0 0.5rem 0.5rem #666;
+				border-radius:1rem;
+				font-size:0.7rem;
+				font-family:微软雅黑;
+			}
+			h3{
+				width:100%;
+				height:2rem;
+				display:flex;
+				justify-content:center;
+				align-items:center;
+				background-color:black;
+				color:white;
+				margin:0.5rem 0;
+			}
+			ul{
+				list-style-position:inside;
+				text-overflow:ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+				padding:1rem;
+			}
+			ul>li{
+				margin:0.5rem 0;
+			}
+		</style>
+		<style>
+			@media (max-width:450px){
+				main{
+					width:auto;
+					height:auto;
+					padding:0;
+					margin:0;
+				}
+			}
+		</style>
+		<title>JS数据结构——图的表示</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//封装字典类
+			function Dictionary(){
+				this.items = {};
+				var that = this;
+				Dictionary.prototype.has = function(key){
+					return key in this.items;
+				}
+				Dictionary.prototype.set = function(key, value){
+					this.items[key] = value;
+				}
+				Dictionary.prototype.remove = function(key){
+					if(that.has(key)){
+						delete this.items[key];
+						return true;
+					}else{
+						return false;
+					}
+				}
+				Dictionary.prototype.get = function(key){
+					return that.has(key) ? this.items[key] : undefined;
+				}
+				 Dictionary.prototype.values = function(){
+					 var values = {};
+					 for(var k in this.items){
+						 if(that.has(k)){
+							 values.push(this.items[k]);
+						 }
+					 }
+					 return values;
+				 }
+			}
+			// 创建图类
+			function Graph(){
+				// 数组，存储图中所有顶点的名字
+				this.vertices = [];
+				// 字典，存储邻接表；将顶点的名字作为键，邻接顶点列表作为值。
+				this.adjList = new Dictionary();
+				// 向图中添加一个新的顶点
+				Graph.prototype.addVertex = function(v){
+					this.vertices.push(v);
+					this.adjList.set(v, []);
+				}
+				// 用来添加顶点之间的边的方法
+				Graph.prototype.addEdge = function(v, w){
+					this.adjList.get(v).push(w);
+					this.adjList.get(w).push(v);
+				}
+				Graph.prototype.toString = function(){
+					var s = '';
+					for(var i=0; i<this.vertices.length; i++){
+						s += this.vertices[i] + '->';
+						var neighbors = this.adjList.get(this.vertices[i]);
+						for(var j=0; j<neighbors.length; j++){
+							s += neighbors[j] + ' ';
+						}
+						s += '\n';
+					}
+					return s;
+				}
+				// 实现广度优先搜索算法
+				Dictionary.prototype.initalizeColor = function(){
+					var color = [];
+					for(var i=0; i<this.vertices.length; i++){
+						color[this.vertices[i]] = 'white';
+					}
+					return color;
+				}
+				Dictionary.prototype.bfs = function(v, callback){
+					var color = that.initalizeColor();
+					var queue = new Queue();
+					queue.enqueue(v);
+					while(!queue.isEmpty()){
+						var u = queue.dequeue();
+						var neighbors = adjList.get(u);
+						color[u] = 'grey';
+						for(var i=0; i<neighbors.length; i++){
+							var w = neighbors[i];
+							if (color[w] === 'white'){ 
+							 color[w] = 'grey'; 
+							 queue.enqueue(w); 
+							 }
+						}
+						color[u] = 'black';
+						if(callback){
+							callback(u);
+						}
+					}
+				}
+				
+				// 实现广度优先算法
+				Dictionary.prototype.dfs = function(callback) {
+					var color = initializeColor();
+					for (var i = 0; i < this.vertices.length; i++) { //{2} 
+						if (color[vertices[i]] === 'white') { //{3} 
+							dfsVisit(this.vertices[i], color, callback); //{4} 
+						}
+					}
+				};
+				Dictionary.prototype.dfsVisit = function(u, color, callback) {
+					color[u] = 'grey'; //{5} 
+					if (callback) { //{6} 
+						callback(u);
+					}
+					var neighbors = adjList.get(u); //{7} 
+					for (var i = 0; i < neighbors.length; i++) { //{8} 
+						var w = neighbors[i]; //{9} 
+						if (color[w] === 'white') { //{10} 
+							dfsVisit(w, color, callback); //{11} 
+						}
+					}
+					color[u] = 'black'; //{12} 
+				};
+			}
+			
+			//------------------测试
+			var graph = new Graph(); 
+			var myVertices = ['A','B','C','D','E','F','G','H','I']; //{7} 
+			for (var i=0; i<myVertices.length; i++){ //{8} 
+			 graph.addVertex(myVertices[i]); 
+			} 
+			graph.addEdge('A', 'B'); //{9} 
+			graph.addEdge('A', 'C'); 
+			graph.addEdge('A', 'D'); 
+			graph.addEdge('C', 'D'); 
+			graph.addEdge('C', 'G'); 
+			graph.addEdge('D', 'G'); 
+			graph.addEdge('D', 'H'); 
+			graph.addEdge('B', 'E'); 
+			graph.addEdge('B', 'F'); 
+			graph.addEdge('E', 'I');
+			console.log(graph.toString());
+			// function printNode(value){ 
+			//  console.log('Visited vertex: ' + value); 
+			// } 
+			// graph.bfs(myVertices[0], printNode);
+		</script>
+	</body>
+</html>
